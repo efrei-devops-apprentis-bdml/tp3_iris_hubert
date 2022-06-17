@@ -23,20 +23,20 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/20211068:latest
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/20211068:latest
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/20180076:latest
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/20180076:latest
       
       - name: 'Deploy to Azure Container Instances'
         uses: 'azure/aci-deploy@v1'
         with:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
-          dns-name-label: devops-iris
+          dns-name-label: devops-20180076
           image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/20211068:latest
           registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           registry-username: ${{ secrets.REGISTRY_USERNAME }}
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           environment-variables: API_KEY=${{ secrets.API_KEY }}
-          name: 'iris'
+          name: '20180076'
           ports:
               80
           location: 'france central'
